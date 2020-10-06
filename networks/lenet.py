@@ -6,7 +6,7 @@ import sys, os
 import random
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from utils import mixup_data
-
+from kmeans import KMeans
 
 ## code for CNN13 from https://github.com/benathi/fastswa-semi-sup/blob/master/mean_teacher/architectures.py
 from torch.nn.utils import weight_norm
@@ -44,7 +44,8 @@ class CNN13(nn.Module):
         self.bn3c = nn.BatchNorm2d(128)
         self.ap3 = nn.AvgPool2d(6, stride=2, padding=0)
         
-        self.fc1 =  weight_norm(nn.Linear(128, num_classes))
+        self.fc1 =  weight_norm(KMeans(128, num_classes))
+        # self.fc1 =  weight_norm(nn.Linear(128, num_classes))
         
     def forward(self, x, target=None, mixup_hidden = False,  mixup_alpha = 0.1, layers_mix=None):
         if mixup_hidden == True:
