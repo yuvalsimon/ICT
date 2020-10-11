@@ -44,8 +44,7 @@ class CNN13(nn.Module):
         self.bn3c = nn.BatchNorm2d(128)
         self.ap3 = nn.AvgPool2d(6, stride=2, padding=0)
         
-        self.fc1 =  weight_norm(KMeans(128, num_classes))
-        # self.fc1 =  weight_norm(nn.Linear(128, num_classes))
+        self.fc1 =  KMeans(128, num_classes, 50, 1)
         
     def forward(self, x, target=None, mixup_hidden = False,  mixup_alpha = 0.1, layers_mix=None):
         if mixup_hidden == True:

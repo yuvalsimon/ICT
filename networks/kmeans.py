@@ -49,4 +49,4 @@ class KMeans(nn.Module):
     def forward(self, x):
         mu_init, _, _ = cluster(x, self.K, 1, self.num_iter, cluster_temp = self.cluster_temp, init = self.init)
         mu, r, dist = cluster(x, self.K, 1, 1, cluster_temp = self.cluster_temp, init = mu_init.detach().clone())
-        return mu, r, dist
+        return r
